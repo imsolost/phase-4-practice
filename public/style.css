@@ -3,3 +3,39 @@ html, body {
   padding: 0;
   width: 100vw;
 }
+
+.body-container {
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row-space-around {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar {
+  background-color: grey;
+  border-bottom: 3px solid #222;
+  width: 100%;
+  padding: 0 1em 0 1em;
+  margin: 0;
+  justify-content: space-between;
+}
+
+.navbar-text {
+  color: #222;
+  margin: 0 3em 0 3em;
+}
+
+.vinyl {
+  font-family: 'Baloo Bhaijaan', cursive;
+  font-size: 3em;
+}
