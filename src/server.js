@@ -1,10 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const database = require('./database')
+const database = require('./db/database')
 const app = express()
 
-require('ejs')
 app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views')
+
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
