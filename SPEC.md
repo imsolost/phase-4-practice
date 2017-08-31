@@ -45,12 +45,12 @@ Use this data to seed the `albums` table on your database.
 
 ## General Requirements
 
-- [ ] __10:__ Solution is in a public repository called `phase-4-challenge`.
-- [ ] __10:__ All dependencies are declared in a `package.json` file.
+- [x] __10:__ Solution is in a public repository called `phase-4-challenge`.
+- [x] __10:__ All dependencies are declared in a `package.json` file.
 - [ ] __50:__ The layouts of your views match the wireframes.
-- [ ] __10:__ Express is used for the web server.
-- [ ] __10:__ PostgreSQL is used for the database.
-- [ ] __10:__ Database is seeded with at least 4 albums (check out the [sample data](#sample-data)).
+- [x] __10:__ Express is used for the web server.
+- [x] __10:__ PostgreSQL is used for the database.
+- [x] __10:__ Database is seeded with at least 4 albums (check out the [sample data](#sample-data)).
 
 _The items that are already checked off have been completed in the [scaffold][scaffold]._
 
@@ -62,8 +62,8 @@ Allow users to sign up, sign in, view their profile page, and sign out.
 
 **Users can...**
 
-- [ ] __20:__ Navigate to "/" and see a basic home page.
-- [ ] __20:__ See the name of the website on the home page.
+- [x] __20:__ Navigate to "/" and see a basic home page.
+- [x] __20:__ See the name of the website on the home page.
 - [ ] __20:__ See links to "Sign In" and "Sign Up" on the home page.
 - [ ] __20:__ Sign up for an account with name, email, and password.
 - [ ] __20:__ Sign in to their account if they already have one.
@@ -81,9 +81,9 @@ Allow users to see albums and leave reviews on them.
 
 **Users can...**
 
-- [ ] __20:__ View all albums on the home page (under "Records").
+- [x] __20:__ View all albums on the home page (under "Records").
 - [ ] __20:__ View the most recent 3 reviews on the home page.
-- [ ] __20:__ Click on an album title to go to the album page (e.g. "/albums/1").
+- [x] __20:__ Click on an album title to go to the album page (e.g. "/albums/1").
 - [ ] __20:__ See the site-wide header on the album page.
 - [ ] __20:__ See the name of the album on the album page.
 - [ ] __20:__ See all reviews for the album on album page sorted by newest first.
