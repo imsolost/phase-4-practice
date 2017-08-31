@@ -1,0 +1,29 @@
+<%- include partials/header.ejs %>
+
+  <h2>Profile</h2>
+
+  <div class='user-column'>
+  <img class='profile-pic' src='<%= reviews[0].picture %>'/>
+  <div class='box'>
+    <h2><%= reviews[0].name %></h2>
+    <br>
+    <p>Member since: <%= reviews[0].join_date %></p>
+    <button class='edit-profile'>Edit Profile</button>
+  </div>
+</div>
+
+<div class='post-column'>
+  <% if (reviews[0].title) {
+    reviews.forEach( post => { %>
+      <a href="/post/<%= post.post_id%>">
+        <div class='box blue-box'>
+          <p>  <%= post.title %> </p>
+        </div>
+      </a>
+    <% })
+  } else { %>
+    <p class='box blue-box'> This user has no reviews </p>
+  <% } %>
+</div>
+
+<%- include partials/footer.ejs %>

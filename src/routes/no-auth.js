@@ -16,7 +16,7 @@ router.route('/signup')
   .get( (req, res) => res.render('signup') )
   .post( (req, res) => {
     users.create(req.body.username, req.body.email, req.body.password)
-      .then(res.redirect('/profile'))
+      .then(res.redirect(`/profile/${username}`))
   })
 
 router.route('/signin')
@@ -33,6 +33,12 @@ router.route('/signin')
         else res.send('sorry, wrong password')
       })
   })
+
+router.get('/profile/:username', (req, res) => {
+  users.getByUsername(req.params.username)
+    .then( reviews => res.render('profile', { reviews }) )
+    .catch( error => console.log(error) )
+})
 
 router.get('/albums/:albumID', (req, res) => {
   const albumID = req.params.albumID
