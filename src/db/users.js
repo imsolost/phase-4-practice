@@ -1,12 +1,12 @@
-const db = require('./db').db
+const db = require('./db')
 const pgp = require('pg-promise')()
 
-create = (name, username, email, password) => {
+create = (username, email, password) => {
   return db.one(`
-    INSERT INTO users (name, username, email, password)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO users (username, email, password)
+    VALUES ($1, $2, $3)
     RETURNING user_id`,
-    [name, username, email, password])
+    [username, email, password])
     .catch((error) => {
       console.log("\nError in create query\n")
       throw error
@@ -16,7 +16,7 @@ create = (name, username, email, password) => {
 getByUsername = (username) => {
   return db.query(`
     SELECT * FROM users
-    LEFT OUTER JOIN posts USING(user_id)
+    LEFT OUTER JOIN reviews USING(user_id)
     WHERE users.username = $1`,
     [username])
     .catch((error) => {
@@ -25,13 +25,13 @@ getByUsername = (username) => {
     })
 }
 
-update = (username , name, current_city) => {
+update = (username , email, password) => {
   return db.one(`
     UPDATE users
-    SET (name, current_city) = ($2, $3)
+    SET (email, password) = ($2, $3)
     WHERE username = $1
     RETURNING *`,
-    [username , name, current_city])
+    [username , email, password])
   .catch((error) => {
     console.log("\nError in update query\n")
     throw error

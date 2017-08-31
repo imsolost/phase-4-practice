@@ -1,4 +1,5 @@
 const database = require('../db/database.js')
+const users = require('../db/users.js')
 const router = require('express').Router()
 
 router.get('/', (req, res) => {
@@ -14,20 +15,16 @@ router.get('/', (req, res) => {
 router.route('/signup')
   .get( (req, res) => res.render('signup') )
   .post( (req, res) => {
-    const name = req.body.name
-    const username = req.body.username
-    const email = req.body.email
-    const password = req.body.password
-    user.create(name, username, email, password)
-      .then(res.redirect('/login'))
+    users.create(req.body.username, req.body.email, req.body.password)
+      .then(res.redirect('/profile'))
   })
 
-router.route('/login')
-  .get( (req, res) => res.render('login') )
+router.route('/signin')
+  .get( (req, res) => res.render('signin') )
   .post( (req, res) => {
     const username = req.body.username
     const password = req.body.password
-    user.getByUsername(username)
+    users.getByUsername(username)
       .then(user => {
         if (password === user[0].password) {
           req.session.user = user[0]
