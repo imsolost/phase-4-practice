@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const database = require('./db/database')
+// const database = require('./db/database')
 const app = express()
 
 app.set('view engine', 'ejs');
@@ -10,28 +10,8 @@ app.set('views', __dirname + '/views')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get('/', (request, response) => {
-  database.getAlbums((error, albums) => {
-    if (error) {
-      response.status(500).render('error', { error: error })
-    } else {
-      response.render('index', { albums: albums })
-    }
-  })
-})
 
-app.get('/albums/:albumID', (request, response) => {
-  const albumID = request.params.albumID
-
-  database.getAlbumsByID(albumID, (error, albums) => {
-    if (error) {
-      response.status(500).render('error', { error: error })
-    } else {
-      const album = albums[0]
-      response.render('album', { album: album })
-    }
-  })
-})
+app.use('/', require('./routes') )
 
 app.use((request, response) => {
   response.status(404).render('not_found')
