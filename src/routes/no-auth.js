@@ -34,6 +34,11 @@ router.route('/signin')
       })
   })
 
+router.get('/logout', (req, res) => {
+    req.session.destroy()
+    res.redirect('/')
+})
+
 router.get('/profile/:username', (req, res) => {
   users.getByUsername(req.params.username)
     .then( reviews => res.render('profile', { reviews }) )
