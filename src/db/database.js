@@ -16,7 +16,7 @@ const query = function(sql, variables, callback){
       console.error(error)
       callback(error)
     }else{
-      console.log('QUERY <-', JSON.stringify(result.rows))
+      // console.log('QUERY <-', JSON.stringify(result.rows))
       callback(error, result.rows)
     }
   })

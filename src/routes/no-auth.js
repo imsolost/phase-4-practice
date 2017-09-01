@@ -16,7 +16,7 @@ router.route('/signup')
   .get( (req, res) => res.render('signup') )
   .post( (req, res) => {
     users.create(req.body.username, req.body.email, req.body.password)
-      .then(res.redirect(`/profile/${username}`))
+      .then(res.redirect('/signin'))
   })
 
 router.route('/signin')
