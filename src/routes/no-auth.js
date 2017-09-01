@@ -1,5 +1,6 @@
 const database = require('../db/database.js')
 const users = require('../db/users.js')
+const albums = require('../db/albums.js')
 const router = require('express').Router()
 
 router.get('/', (req, res) => {
@@ -45,17 +46,25 @@ router.get('/profile/:username', (req, res) => {
     .catch( error => console.log(error) )
 })
 
-router.get('/albums/:albumID', (req, res) => {
-  const albumID = req.params.albumID
+router.get('/albums/:title', (req, res) => {
+  albums.getByTitle(req.params.title)
 
-  database.getAlbumsByID(albumID, (error, albums) => {
-    if (error) {
-      res.status(500).render('error', { error: error })
-    } else {
-      const album = albums[0]
-      res.render('album', { album: album })
-    }
-  })
+    .then( album => res.render('album', { album }) )
+    .catch( error => console.log(error) )
 })
+
+
+// router.get('/albums/:albumID', (req, res) => {
+//   const albumID = req.params.albumID
+//
+//   database.getAlbumsByID(albumID, (error, albums) => {
+//     if (error) {
+//       res.status(500).render('error', { error: error })
+//     } else {
+//       const album = albums[0]
+//       res.render('album', { album: album })
+//     }
+//   })
+// })
 
 module.exports = router

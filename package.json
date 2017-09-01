@@ -8,7 +8,7 @@
     "start:dev": "nodemon",
     "dropdb": "dropdb vinyl",
     "schema": "psql < src/db/schema.sql",
-    "seed": "npm run schema && psql -d vinyl < src/db/seed.sql",
+    "seed": "npm run schema && psql -d vinyl < src/db/seed.sql && npm run load_session_store",
     "load_session_store": "psql vinyl < node_modules/connect-pg-simple/table.sql"
   },
   "license": "MIT",

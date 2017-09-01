@@ -16,7 +16,8 @@ create = (username, email, password) => {
 getByUsername = (username) => {
   return db.query(`
     SELECT * FROM users
-    LEFT OUTER JOIN reviews USING(user_id)
+    JOIN reviews USING(user_id)
+    JOIN albums USING(album_id)
     WHERE users.username = $1`,
     [username])
     .catch((error) => {
