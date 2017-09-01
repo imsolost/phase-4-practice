@@ -17,8 +17,8 @@ VALUES
 INSERT INTO
   reviews (user_id, album_id, content)
 VALUES
-  (1, 1, 'a review of Malibu. It is great!'),
-  (1, 2, 'a review of A Seat at the Table. It is great!'),
-  (1, 3, 'a review of Melodrama. It is ok'),
-  (2, 1, 'a review of Malibu. It is ok.')
+  (1, 1, 'A review of Malibu. It was great!'),
+  (1, 2, 'A review of A Seat at the Table. It was great!'),
+  (1, 3, 'A review of Melodrama. It was ok.'),
+  (2, 1, 'A review of Malibu. It was ok.')
 ;

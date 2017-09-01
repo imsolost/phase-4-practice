@@ -1,3 +1,5 @@
+<title>Vinyl: <%= reviews[0].username %></title>
+
 <%- include partials/header.ejs %>
 
   <div class='user-column'>
@@ -13,11 +15,12 @@
     <h2>Reviews</h2>
     <% if (reviews[0].review_id) {
       reviews.forEach( review => { %>
-        <a href="/albums/<%= review.title%>">
-          <div class='box blue-box'>
-            <p>  <%= review.title %> </p>
-          </div>
-        </a>
+        <div class='box blue-box'>
+          <p> <a href="/albums/<%= review.title%>" > <%= review.title %> </a> </p>
+          <p> <%= review.review_date %> </p>
+          <p> <%= review.content %> </p>
+          <p> by <a href="/profile/<%= review.username%>" > <%= review.username %> </a> </p>
+        </div>
       <% })
     } else { %>
       <p class='box blue-box'> This user has no reviews </p>

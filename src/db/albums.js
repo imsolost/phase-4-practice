@@ -4,8 +4,8 @@ const pgp = require('pg-promise')()
 getByTitle = (title) => {
   return db.query(`
     SELECT * FROM albums
-    JOIN reviews USING(album_id)
-    JOIN users USING(user_id)
+    FULL OUTER JOIN reviews USING(album_id)
+    FULL OUTER JOIN users USING(user_id)
     WHERE albums.title = $1`,
     [title])
     .catch((error) => {

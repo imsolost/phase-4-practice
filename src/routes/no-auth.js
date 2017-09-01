@@ -18,6 +18,7 @@ router.route('/signup')
   .post( (req, res) => {
     users.create(req.body.username, req.body.email, req.body.password)
       .then(res.redirect('/signin'))
+      .catch( error => res.status(500).render('error', { error } ) )
   })
 
 router.route('/signin')
@@ -33,6 +34,7 @@ router.route('/signin')
         }
         else res.send('sorry, wrong password')
       })
+      .catch( error => res.status(500).render('error', { error } ) )
   })
 
 router.get('/logout', (req, res) => {
@@ -43,28 +45,14 @@ router.get('/logout', (req, res) => {
 router.get('/profile/:username', (req, res) => {
   users.getByUsername(req.params.username)
     .then( reviews => res.render('profile', { reviews }) )
-    .catch( error => console.log(error) )
+    .catch( error => res.status(500).render('error', { error } ) )
 })
 
 router.get('/albums/:title', (req, res) => {
   albums.getByTitle(req.params.title)
 
     .then( album => res.render('album', { album }) )
-    .catch( error => console.log(error) )
+    .catch( error => res.status(500).render('error', { error } ) )
 })
-
-
-// router.get('/albums/:albumID', (req, res) => {
-//   const albumID = req.params.albumID
-//
-//   database.getAlbumsByID(albumID, (error, albums) => {
-//     if (error) {
-//       res.status(500).render('error', { error: error })
-//     } else {
-//       const album = albums[0]
-//       res.render('album', { album: album })
-//     }
-//   })
-// })
 
 module.exports = router
