@@ -22,7 +22,7 @@ getReviews = (req, res, next) => {
 }
 
 renderIndex = (req, res, next) => {
-  res.render('index', { albums: req.albums, reviews: req.reviews })
+  res.render('index', { albums: req.albums, reviews: req.reviews, moment })
 }
 
 router.get('/', getAlbums, getReviews, renderIndex)
@@ -40,7 +40,7 @@ router.route('/signin')
   .post( (req, res) => {
     const username = req.body.username
     users.getByUsername(username)
-      .then(user => {
+      .then( user => {
         if (req.body.password === user[0].password) {
           req.session.user = user[0]
           res.redirect(`/profile/${username}`)

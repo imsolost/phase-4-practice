@@ -36,8 +36,20 @@ getByTitle = (title) => {
     })
 }
 
+createReview = (user_id, album_id, content) => {
+  return db.none(`
+    INSERT INTO reviews (user_id, album_id, content)
+    VALUES ($1, $2, $3)`,
+    [user_id, album_id, content])
+    .catch((error) => {
+      console.log("\nError in posts.create query\n")
+      throw error
+    })
+}
+
 module.exports = {
   getAll,
   getRecentReviews,
-  getByTitle
+  getByTitle,
+  createReview
 }

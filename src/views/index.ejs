@@ -6,7 +6,7 @@
     <h2>Records</h2>
     <% albums.forEach( album => { %>
       <div>
-        <h5><a href="/albums/<%= album.title %>"><%= album.title %></a></h5>
+        <h3><a href="/albums/<%= album.title %>"><%= album.title %></a></h3>
         <span><%= album.artist %></span>
       </div>
     <% }) %>
@@ -17,8 +17,12 @@
     <% if (reviews[0].review_id) {
       reviews.forEach( review => { %>
         <div class='box blue-box'>
-          <p> <a href="/albums/<%= review.title%>" > <%= review.title %> </a> </p>
-          <p> <%= review.review_date %> </p>
+          <div class="row-space-between">
+            <h3> <a href="/albums/<%= review.title%>" > <%= review.title %> </a> </h3>
+            <p> <%= moment(review.review_date).fromNow() %> </p>
+          </div>
+
+
           <p> <%= review.content %> </p>
           <p> by <a href="/profile/<%= review.username%>" > <%= review.username %> </a> </p>
         </div>
