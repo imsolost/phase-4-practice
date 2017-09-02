@@ -22,7 +22,7 @@ CREATE TABLE reviews (
   review_id SERIAL PRIMARY KEY,
   user_id INT,
   album_id INT,
-  content VARCHAR(1000),
+  content VARCHAR(1000) NOT NULL,
   review_date DATE DEFAULT CURRENT_DATE,
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (album_id) REFERENCES albums(album_id)

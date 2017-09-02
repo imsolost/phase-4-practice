@@ -30,6 +30,4 @@ app.use('/', require('./routes') )
 
 app.use( (req, res) => res.status(404).render('not_found') )
 
-app.listen( port, () => {
-  console.log(`Listening on http://localhost:${port}...`)
-})
+app.listen( port, () => console.log(`Listening on http://localhost:${port}...`) )

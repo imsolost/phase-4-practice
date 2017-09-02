@@ -3,15 +3,28 @@ const users = require('../db/users.js')
 const albums = require('../db/albums.js')
 const router = require('express').Router()
 
-router.get('/', (req, res) => {
-  database.getAlbums((error, albums) => {
-    if (error) {
-      res.status(500).render('error', { error: error })
-    } else {
-      res.render('index', { albums: albums })
-    }
-  })
-})
+
+function getAlbums(req, res, next) {
+  albums.getAll()
+    .then(albums => {
+      req.albums = albums
+      next()
+    })
+}
+
+function getReviews(req, res, next) {
+  albums.getRecentReviews()
+    .then(reviews => {
+      req.reviews = reviews
+      next()
+    })
+}
+
+function renderIndex(req, res, next) {
+  res.render('index', { albums: req.albums, reviews: req.reviews })
+}
+
+router.get('/', getAlbums, getReviews, renderIndex)
 
 router.route('/signup')
   .get( (req, res) => res.render('signup') )
@@ -25,10 +38,9 @@ router.route('/signin')
   .get( (req, res) => res.render('signin') )
   .post( (req, res) => {
     const username = req.body.username
-    const password = req.body.password
     users.getByUsername(username)
       .then(user => {
-        if (password === user[0].password) {
+        if (req.body.password === user[0].password) {
           req.session.user = user[0]
           res.redirect(`/profile/${username}`)
         }
@@ -50,7 +62,6 @@ router.get('/profile/:username', (req, res) => {
 
 router.get('/albums/:title', (req, res) => {
   albums.getByTitle(req.params.title)
-
     .then( album => res.render('album', { album }) )
     .catch( error => res.status(500).render('error', { error } ) )
 })
