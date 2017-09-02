@@ -2,13 +2,12 @@
 
 <%- include partials/header.ejs %>
 
+  <img class='profile-pic' src='<%= reviews[0].picture %>' style='height:200px'/>
+
   <div class='user-column'>
     <h2><%= reviews[0].username %></h2>
-    <img class='profile-pic' src='<%= reviews[0].picture %>' style='height:200px'/>
-    <div class='box'>
-      <p>Member since: <%= reviews[0].join_date %></p>
-      <button class='edit-profile'>Edit Profile</button>
-    </div>
+    <p>Email: <%= reviews[0].email %></p>
+    <p>Join Date: <%= moment(reviews[0].join_date).format('MMM-DD-YY') %></p>
   </div>
 
   <div class='post-column'>
@@ -16,8 +15,10 @@
     <% if (reviews[0].review_id) {
       reviews.forEach( review => { %>
         <div class='box blue-box'>
-          <p> <a href="/albums/<%= review.title%>" > <%= review.title %> </a> </p>
-          <p> <%= review.review_date %> </p>
+          <div class="row-space-between">
+            <h3> <a href="/albums/<%= review.title%>" > <%= review.title %> </a> </h3>
+            <p> <%= moment(review.review_date).fromNow() %> </p>
+          </div>
           <p> <%= review.content %> </p>
           <p> by <a href="/profile/<%= review.username%>" > <%= review.username %> </a> </p>
         </div>

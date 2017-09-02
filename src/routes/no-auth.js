@@ -1,10 +1,11 @@
 const database = require('../db/database.js')
 const users = require('../db/users.js')
 const albums = require('../db/albums.js')
+const moment = require('moment')
 const router = require('express').Router()
 
 
-function getAlbums(req, res, next) {
+getAlbums = (req, res, next) => {
   albums.getAll()
     .then(albums => {
       req.albums = albums
@@ -12,7 +13,7 @@ function getAlbums(req, res, next) {
     })
 }
 
-function getReviews(req, res, next) {
+getReviews = (req, res, next) => {
   albums.getRecentReviews()
     .then(reviews => {
       req.reviews = reviews
@@ -20,7 +21,7 @@ function getReviews(req, res, next) {
     })
 }
 
-function renderIndex(req, res, next) {
+renderIndex = (req, res, next) => {
   res.render('index', { albums: req.albums, reviews: req.reviews })
 }
 
@@ -56,13 +57,13 @@ router.get('/logout', (req, res) => {
 
 router.get('/profile/:username', (req, res) => {
   users.getByUsername(req.params.username)
-    .then( reviews => res.render('profile', { reviews }) )
+    .then( reviews => res.render('profile', { reviews, moment }) )
     .catch( error => res.status(500).render('error', { error } ) )
 })
 
 router.get('/albums/:title', (req, res) => {
   albums.getByTitle(req.params.title)
-    .then( album => res.render('album', { album }) )
+    .then( album => res.render('album', { album, moment }) )
     .catch( error => res.status(500).render('error', { error } ) )
 })
 

@@ -11,7 +11,7 @@ h1, h2, h3, input {
 
 .body-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .row {
@@ -23,6 +23,13 @@ h1, h2, h3, input {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
+}
+
+.row-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -41,6 +48,10 @@ h1, h2, h3, input {
 }
 
 .vinyl {
-  /*font-family: 'Baloo Bhaijaan', sans-serif;*/
   font-size: 3em;
+}
+
+.profile-pic {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+  margin: 1.25em;
 }
