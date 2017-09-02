@@ -7,7 +7,9 @@
     <em>by <%= album[0].artist %></em>
     <div class="row-space-between">
       <h2>Reviews</h2>
+      <% if (loggedIn) { %>
       <a href="/new-review/<%= album[0].title %>" class="new-review-button"> New Review </a>
+      <% } %>
     </div>
 
     <% if (album[0].review_id) {

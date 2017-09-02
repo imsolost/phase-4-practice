@@ -87,3 +87,7 @@ button {
   background-color: lightgrey;
   border: 3px outset lightgrey;
 }
+
+.post-column {
+  width: 30%
+}
