@@ -1,9 +1,7 @@
-const database = require('../db/database.js')
 const users = require('../db/users.js')
 const albums = require('../db/albums.js')
 const moment = require('moment')
 const router = require('express').Router()
-
 
 getAlbums = (req, res, next) => {
   albums.getAll()
