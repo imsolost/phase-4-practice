@@ -4,8 +4,12 @@ const user = require('./user')
 
 router.use( (req, res, next) => {
   let loggedIn = false
-  if (req.session.user) loggedIn = true
-  res.locals = {loggedIn: loggedIn}
+  let user_id
+  if (req.session.user) {
+    loggedIn = true
+    username = req.session.user.username
+  }
+  res.locals = {loggedIn: loggedIn, username: username || null}
   next()
 })
 

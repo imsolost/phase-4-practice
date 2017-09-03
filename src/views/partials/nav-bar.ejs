@@ -2,8 +2,10 @@
   <a href="/"><h1 class="vinyl navbar-text">Vinyl</h1></a>
 
     <% if (loggedIn) { %>
-      <a class="row" href="/logout"><h3 class="navbar-text">Sign Out</h3></a>
-
+      <div class="row">
+        <a href="/profile/<%= username %> "><h3 class="navbar-text">Profile</h3></a>
+        <a href="/logout"><h3 class="navbar-text">Sign Out</h3></a>
+      </div>
     <% } else { %>
       <div class="row">
         <a href="/signup"><h3 class="navbar-text">Sign Up</h3></a>

@@ -1,4 +1,3 @@
-const users = require('../db/users.js')
 const albums = require('../db/albums.js')
 const router = require('express').Router()
 
@@ -16,5 +15,12 @@ router.route('/new-review/:title')
       .then( res.redirect( `/albums/${req.params.title}` ) )
       .catch( error => res.status(500).render('error', { error } ) )
   })
+
+router.get('/delete/:review_id', (req, res) => {
+  const review_id = req.params.review_id
+  abums.deleteReview(review_id)
+    .then( res.redirect('/') )
+    .catch( error => res.status(500).render('error', { error } ) )
+})
 
 module.exports = router

@@ -48,6 +48,17 @@ createReview = (user_id, album_id, content) => {
     })
 }
 
+deleteReview = (review_id) => {
+  return db.none(`
+    DELETE FROM reviews
+    WHERE review_id = $1`,
+    [review_id])
+    .catch((error) => {
+      console.log("\nError in posts.create query\n")
+      throw error
+    })
+}
+
 module.exports = {
   getAll,
   getRecentReviews,
