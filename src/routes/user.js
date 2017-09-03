@@ -2,16 +2,6 @@ const users = require('../db/users.js')
 const albums = require('../db/albums.js')
 const router = require('express').Router()
 
-let album_id
-
-getAlbumId = (req, res, next) => {
-  albums.getByTitle(title)
-    .then(albums => {
-      album_id = albums[0].album_id
-      next()
-    })
-}
-
 router.route('/new-review/:title')
   .get( (req, res) => {
     albums.getByTitle(req.params.title)

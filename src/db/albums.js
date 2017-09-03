@@ -28,7 +28,8 @@ getByTitle = (title) => {
     SELECT * FROM albums
     FULL OUTER JOIN reviews USING(album_id)
     FULL OUTER JOIN users USING(user_id)
-    WHERE albums.title = $1`,
+    WHERE albums.title = $1
+    ORDER BY review_id DESC`,
     [title])
     .catch( (error) => {
       console.log("\nError in getByTitle query\n")

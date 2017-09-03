@@ -18,7 +18,8 @@ getByUsername = (username) => {
     SELECT * FROM users
     FULL OUTER JOIN reviews USING(user_id)
     FULL OUTER JOIN albums USING(album_id)
-    WHERE users.username = $1`,
+    WHERE users.username = $1
+    ORDER BY review_id DESC`,
     [username])
     .catch((error) => {
       console.log("\nError in getByUsername query\n")

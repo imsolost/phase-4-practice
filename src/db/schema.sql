@@ -15,7 +15,7 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
   picture VARCHAR(255) DEFAULT 'http://www.pieglobal.com/wp-content/uploads/2015/10/placeholder-user.png',
-  join_date DATE DEFAULT CURRENT_DATE
+  join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE reviews (
@@ -23,7 +23,7 @@ CREATE TABLE reviews (
   user_id INT,
   album_id INT,
   content VARCHAR(1000) NOT NULL,
-  review_date DATE DEFAULT CURRENT_DATE,
+  review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(user_id),
   FOREIGN KEY (album_id) REFERENCES albums(album_id)
 );
