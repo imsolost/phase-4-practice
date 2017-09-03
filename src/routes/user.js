@@ -18,8 +18,8 @@ router.route('/new-review/:title')
 
 router.get('/delete/:review_id', (req, res) => {
   const review_id = req.params.review_id
-  abums.deleteReview(review_id)
-    .then( res.redirect('/') )
+  albums.deleteReview(review_id)
+    .then( res.redirect(`/profile/${res.locals.username}`) )
     .catch( error => res.status(500).render('error', { error } ) )
 })
 

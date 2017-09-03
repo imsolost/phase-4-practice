@@ -63,5 +63,6 @@ module.exports = {
   getAll,
   getRecentReviews,
   getByTitle,
-  createReview
+  createReview,
+  deleteReview
 }
