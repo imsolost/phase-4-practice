@@ -17,6 +17,7 @@
         <div class='box blue-box'>
           <div class="row-space-between">
             <h3> <a href="/albums/<%= review.title%>" > <%= review.title %> </a> </h3>
+            <p> <%= moment(review.review_date).fromNow() %> </p>
             <% if (reviews[0].username === username) { %>
               <a href="/albums/<%= review.title%>" >
                 <img src="/trashcan.png" alt="trashcan" class="trashcan" style='height:2em'>

@@ -3,13 +3,12 @@ const noAuth = require('./no-auth')
 const user = require('./user')
 
 router.use( (req, res, next) => {
-  let loggedIn = false
-  let user_id
+  let loggedIn, username
   if (req.session.user) {
     loggedIn = true
     username = req.session.user.username
   }
-  res.locals = {loggedIn: loggedIn, username: username || null}
+  res.locals = { loggedIn: loggedIn, username: username || null }
   next()
 })
 
