@@ -29,7 +29,10 @@ router.route('/signup')
   .get( (req, res) => res.render('signup') )
   .post( (req, res) => {
     users.create(req.body.username, req.body.email, req.body.password)
-      .then(res.redirect('/signin'))
+      .then( () => {
+        req.session.user = { username: req.body.username }
+        req.session.save( res.redirect(`/profile/${req.body.username}`) )
+      })
       .catch( error => res.status(500).render('error', { error } ) )
   })
 
@@ -41,7 +44,7 @@ router.route('/signin')
       .then( user => {
         if (req.body.password === user[0].password) {
           req.session.user = user[0]
-          res.redirect(`/profile/${username}`)
+          req.session.save( res.redirect(`/profile/${username}`) )
         }
         else res.send('sorry, wrong password')
       })
@@ -49,8 +52,7 @@ router.route('/signin')
   })
 
 router.get('/logout', (req, res) => {
-    req.session.destroy()
-    res.redirect('/')
+    req.session.destroy( res.redirect('/') )
 })
 
 router.get('/profile/:username', (req, res) => {
