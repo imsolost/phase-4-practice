@@ -16,10 +16,13 @@ router.route('/new-review/:title')
       .catch( error => res.status(500).render('error', { error } ) )
   })
 
-router.get('/delete/:review_id', (req, res) => {
-  const review_id = req.params.review_id
-  albums.deleteReview(review_id)
-    .then( res.redirect(`/profile/${res.locals.username}`) )
+router.delete('/delete/:review_id', (req, res) => {
+  albums.getReviewById(req.params.review_id)
+    .then( review => {
+      if (review.username === req.session.user.username) {
+        albums.deleteReview(req.params.review_id)
+      } else res.redirect('/')
+    })
     .catch( error => res.status(500).render('error', { error } ) )
 })
 

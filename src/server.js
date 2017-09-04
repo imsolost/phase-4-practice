@@ -19,7 +19,7 @@ const sessionOptions = {
 }),
   name: 'session',
   secret: 'hush hush',
-  cookie: { maxAge: 1000 * 60 * 5 * 1 },
+  cookie: { maxAge: 1000 * 60 * 60 * 1 },
   resave: false,
   saveUninitialized: false,
 }

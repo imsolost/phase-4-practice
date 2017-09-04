@@ -59,10 +59,23 @@ deleteReview = (review_id) => {
     })
 }
 
+getReviewById = (review_id) => {
+  return db.one(`
+    SELECT* FROM reviews
+    FULL OUTER JOIN users USING(user_id)
+    WHERE review_id = $1`,
+    [review_id])
+    .catch((error) => {
+      console.log("\nError in posts.create query\n")
+      throw error
+    })
+}
+
 module.exports = {
   getAll,
   getRecentReviews,
   getByTitle,
   createReview,
-  deleteReview
+  deleteReview,
+  getReviewById
 }
