@@ -61,7 +61,7 @@ deleteReview = (review_id) => {
 
 getReviewById = (review_id) => {
   return db.one(`
-    SELECT* FROM reviews
+    SELECT * FROM reviews
     FULL OUTER JOIN users USING(user_id)
     WHERE review_id = $1`,
     [review_id])
@@ -71,11 +71,25 @@ getReviewById = (review_id) => {
     })
 }
 
+const search = (searchQuery) => {
+  return db.query(`
+    SELECT
+      *
+    FROM
+      albums
+    WHERE
+      lower(title || ' ' || artist) LIKE $1::text
+    `,
+    [`%${searchQuery.toLowerCase().replace(/\s+/,'%')}%`])
+    .catch(error => error);
+}
+
 module.exports = {
   getAll,
   getRecentReviews,
   getByTitle,
   createReview,
   deleteReview,
-  getReviewById
+  getReviewById,
+  search
 }

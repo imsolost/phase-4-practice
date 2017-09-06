@@ -1,6 +1,11 @@
 <div class ="navbar row-space-around">
   <a href="/"><h1 class="vinyl navbar-text">Vinyl</h1></a>
 
+  <form method="get" action="/search" class="search-form">
+    <input name="q" type="search" placeholder="search" value="<%= query %>" autofocus/>
+    <input type="submit" style="display: none" />
+  </form>
+
     <% if (loggedIn) { %>
       <div class="row">
         <a href="/profile/<%= username %> "><h3 class="navbar-text">Profile</h3></a>

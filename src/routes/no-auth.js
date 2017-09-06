@@ -22,7 +22,7 @@ getReviews = (req, res, next) => {
 }
 
 renderIndex = (req, res, next) => {
-  res.render('index', { albums: req.albums, reviews: req.reviews, moment })
+  res.render('index', { albums: req.albums, reviews: req.reviews, moment, query: null })
 }
 
 router.get('/', getAlbums, getReviews, renderIndex)
@@ -71,6 +71,16 @@ router.get('/profile/:username', (req, res) => {
 router.get('/albums/:title', (req, res) => {
   albums.getByTitle(req.params.title)
     .then( album => res.render('album', { album, moment }) )
+    .catch( error => res.status(500).render('error', { error } ) )
+})
+
+router.get('/search', (req, res, next) => {
+  const query = req.query.q
+  albums.search(query)
+    .then( (albums) => {
+      if (albums) return res.render('index', { albums, query, reviews: [''], moment })
+      next()
+    })
     .catch( error => res.status(500).render('error', { error } ) )
 })
 
