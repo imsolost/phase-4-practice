@@ -31,8 +31,8 @@ router.route('/signup')
   .get( (req, res) => res.render('signup') )
   .post( (req, res) => {
     encryptPassword(req.body.password)
-      .then( password => {
-        users.create(req.body.username, req.body.email, password)
+      .then( encryptedPass => {
+        users.create(req.body.username, req.body.email, encryptedPass)
           .then( () => {
             req.session.user = { username: req.body.username }
             req.session.save( res.redirect(`/profile/${req.body.username}`) )
@@ -47,13 +47,15 @@ router.route('/signin')
     const username = req.body.username
     users.getByUsername(username)
       .then( user => {
-        if (req.body.password === user[0].password) {
-          req.session.user = user[0]
-          req.session.save( res.redirect(`/profile/${username}`) )
-        }
-        else res.send('sorry, wrong password')
+        comparePasswords(req.body.password, user[0].password)
+          .then( boolean => {
+            if (boolean) {
+              req.session.user = user[0]
+              req.session.save( res.redirect(`/profile/${username}`) )
+            } else res.send('sorry, wrong password')
+          })
+          .catch( error => res.status(500).render('error', { error } ) )
       })
-      .catch( error => res.status(500).render('error', { error } ) )
   })
 
 router.get('/logout', (req, res) => {
